@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>Меню с деталями</title>
+<style>
+  body {
+    margin: 0;
+    background-color: #121212;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: #ffffff;
+  }
+
+  .header {
+    text-align: center;
+    font-weight: 700;
+    font-size: 28px;
+    padding: 20px 10px 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 1.2px;
+    user-select: none;
+  }
+
+  .menu {
+    max-width: 400px;
+    margin: 0 auto 30px;
+    padding: 0 10px;
+  }
+
+  .menu-item {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .menu-item:hover {
+    background-color: #2a2a2a;
+  }
+
+  .emoji {
+    font-size: 20px;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .menu-text {
+    flex-grow: 1;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .arrow {
+    font-size: 18px;
+    color: #888888;
+    flex-shrink: 0;
+  }
+
+  .details {
+    max-width: 400px;
+    margin: 0 auto 30px;
+    padding: 20px 16px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    display: none;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .details h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 22px;
+    border-bottom: 2px solid #444;
+    padding-bottom: 6px;
+  }
+
+  .details h3 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 18px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 4px;
+  }
+
+  .details p {
+    margin: 6px 0;
+  }
+
+  .field-name {
+    font-weight: 600;
+    color: #a0a0a0;
+  }
+
+  /* Список телефонов и адресов - выделяем белым */
+  .details ul {
+    margin: 6px 0 12px 20px;
+    padding-left: 0;
+    list-style-type: decimal;
+    color: #ffffff;
+  }
+
+  /* Отступы между родственниками */
+  .relative-block {
+    margin-bottom: 24px;
+  }
+
+  /* Стиль для ссылок */
+  a {
+    color: #4ea1ff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Картинка в социальных сетях */
+  .social-photo {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+  }
+
+  .back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 18px;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    color: #ccc;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .back-button:hover {
+    background-color: #444;
+  }
+
+  /* Кнопка "Перейти в канал" для Фото-Материала */
+  .photo-channel-button {
+    display: inline-block;
+    padding: 14px 28px;
+    font-size: 18px;
+    color: #ccc;
+    border: 2px solid #888888;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    user-select: none;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .photo-channel-button:hover {
+    background-color: #444444;
+    color: #ffffff;
+    border-color: #4ea1ff;
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">Mirma/Enco/Dorofeev</div>
+
+  <div class="menu" id="menu">
+    <div class="menu-item" id="btn-lichnye">
+      <div class="emoji">⌬</div>
+      <div class="menu-text">Личные Данные</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="menu-item" id="btn-rodstvenniki">
+      <div class="emoji">⌭</div>
+      <div class="menu-text">Родственники</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="menu-item" id="btn-socseti">
+      <div class="emoji">⚛</div>
+      <div class="menu-text">Социальные сети</div>
+      <div class="arrow">›</div>
+    </div>
+    <div class="menu-item" id="btn-fotomaterial">
+      <div class="emoji">⌘</div>
+      <div class="menu-text">Фото-Материал</div>
+      <div class="arrow">›</div>
+    </div>
+  </div>
+
+  <div class="details" id="details-lichnye">
+    <h2>Личные Данные</h2>
+    <p><span class="field-name">Фамилия:</span> Розаханов</p>
+    <p><span class="field-name">Имя:</span> Ильяр</p>
+    <p><span class="field-name">Отчество:</span> Адлжанович</p>
+    <p><span class="field-name">Дата рождения:</span> 15.07.2008</p>
+    <p><span class="field-name">Возраст:</span> 16</p>
+    <p><span class="field-name">Телефон:</span></p>
+    <ul>
+      <li>77018888420 (на данный номер зарегистрирована почти вся семейка пиздасреефа, убожество нищебродское)</li>
+      <li>77027457676</li>
+    </ul>
+    <p><span class="field-name">Иин:</span> 80715550060</p>
+    <p><span class="field-name">Паспорт:</span> 0546389</p>
+    <p><span class="field-name">Номер идентификации:</span> 15300000015138315</p>
+    <p><span class="field-name">Адрес проживания:</span></p>
+    <ul>
+      <li>Казахстан, г.Алматы, п.Заря, ул. Восток Коктем, дом 13</li>
+      <li>Казахстан, обл. Алматинская, р-н. Талгарский, с-о. Туздыбастауский, аул Туздыбастау, ул.Балуан Шолака, дом 53</li>
+    </ul>
+    <div class="back-button" id="backBtn-lichnye">← Назад</div>
+  </div>
+
+  <div class="details" id="details-rodstvenniki">
+    <h2>Родственники</h2>
+
+    <div class="relative-block">
+      <h3>Отец:</h3>
+      <p><span class="field-name">Фамилия:</span> Розаханов</p>
+      <p><span class="field-name">Имя:</span> Адлжан</p>
+      <p><span class="field-name">Отчество:</span> Абдушукурович</p>
+      <p><span class="field-name">Дата рождения:</span> 06.07.1984</p>
+      <p><span class="field-name">Возраст:</span> 40</p>
+      <p><span class="field-name">Телефон:</span> 77007247618</p>
+      <p><span class="field-name">Паспорт:</span> 024631372</p>
+      <p><span class="field-name">Иин:</span> 840706300677</p>
+      <p><span class="field-name">Водительское удостоверение:</span> AW015491</p>
+      <p><span class="field-name">Адрес проживания:</span></p>
+      <ul>
+        <li>Казахстан, г.Алматы, п.Заря, ул. Восток Коктем, дом 13
+        </li>
+        <li>Казахстан, обл. Алматинская, р-н. Талгарский, с-о. Туздыбастауский, аул Туздыбастау, ул.Балуан Шолака, дом 53</li>
+      </ul>
+    </div>
+
+    <div class="relative-block">
+      <h3>Мать:</h3>
+      <p><span class="field-name">Фамилия:</span> Розаханова</p>
+      <p><span class="field-name">Имя:</span> Мархаба</p>
+      <p><span class="field-name">Отчество:</span> Иминжановна</p>
+      <p><span class="field-name">Дата рождения:</span> 20.02.1987</p>
+      <p><span class="field-name">Возраст:</span> 38</p>
+      <p><span class="field-name">Телефон:</span> (идентичен сророфеевскому)</p>
+      <p><span class="field-name">Иин:</span> 870220400082</p>
+      <p><span class="field-name">Паспорт:</span> N10906834</p>
+      <p><span class="field-name">Адрес проживания:</span></p>
+      <ul>
+        <li>Казахстан, г.Алматы, р-н.Алатауский, ул. Жансугурова/Заря Востока, дом 21</li>
+        <li>Казахстан, г.Алматы, п.Заря, ул. Восток Коктем, дом 13</li>
+        <li>Казахстан, обл. Алматинская, р-н. Талгарский, с-о. Туздыбастауский, аул Туздыбастау, ул.Балуан Шолака, дом 53</li>
+      </ul>
+    </div>
+
+    <div class="relative-block">
+      <h3>Родственники:</h3>
+
+      <p><span class="field-name">Фамилия:</span> Розаханов</p>
+      <p><span class="field-name">Имя:</span> Данияр</p>
+      <p><span class="field-name">Отчество:</span> Адлжанович</p>
+      <p><span class="field-name">Дата рождения:</span> 04.10.2009</p>
+      <p><span class="field-name">Возраст:</span> 15</p>
+      <p><span class="field-name">Иин:</span> 91004550882</p>
+      <p><span class="field-name">Паспорт:</span> 0814854</p>
+    </div>
+
+    <div class="relative-block">
+      <p><span class="field-name">Фамилия:</span> Розаханов</p>
+      <p><span class="field-name">Имя:</span> Юсуф</p>
+      <p><span class="field-name">Отчество:</span> Адлжанович</p>
+      <p><span class="field-name">Дата рождения:</span> 26.11.2019</p>
+      <p><span class="field-name">Возраст:</span> 5</p>
+      <p><span class="field-name">Иин:</span> 191126504576</p>
+    </div>
+
+    <div class="relative-block">
+      <p><span class="field-name">Фамилия:</span> Розаханов</p>
+      <p><span class="field-name">Имя:</span> Рамзан</p>
+      <p><span class="field-name">Отчество:</span> Адлжанович</p>
+      <p><span class="field-name">Дата рождения:</span> 08.08.2012</p>
+      <p><span class="field-name">Возраст:</span> 12</p>
+      <p><span class="field-name">Иин:</span> 120808503212</p>
+      <p><span class="field-name">Паспорт:</span> 2686988</p>
+    </div>
+
+    <div class="relative-block">
+      <p><span class="field-name">Фамилия:</span> Розаханова</p>
+      <p><span class="field-name">Имя:</span> Амина</p>
+      <p><span class="field-name">Отчество:</span> Адлжановна</p>
+      <p><span class="field-name">Дата рождения:</span> 08.11.2017</p>
+      <p><span class="field-name">Возраст:</span> 7</p>
+      <p><span class="field-name">Телефон:</span></p>
+      <ul>
+        <li>77072522852</li>
+        <li>78707146589</li>
+      </ul>
+      <p><span class="field-name">Иин:</span> 171108604540</p>
+    </div>
+
+    <div class="relative-block">
+      <p><span class="field-name">Всеобщий адрес рабов хуя и место проживания:</span></p>
+      <p>Казахстан, обл. Алматинская, р-н. Талгарский, с-о. Туздыбастауский, аул Туздыбастау, ул.Балуан Шолака, дом 53</p>
+    </div>
+
+    <div class="relative-block">
+      <p>Ещё куча ненужных родственников блядины сразахской, по типу срадиля которого мы вертели на хую</p>
+    </div>
+
+    <div class="back-button" id="backBtn-rodstvenniki">← Назад</div>
+  </div>
+
+  <div class="details" id="details-socseti">
+    <h2>Социальные сети</h2>
+
+    <h3>Страницы VK:</h3>
+
+    <div class="relative-block">
+      <p><span class="field-name">1:</span> <a href="https://vk.com/id755934003" target="_blank" rel="noopener noreferrer">https://vk.com/id755934003</a></p>
+      <p><span class="field-name">Дата регистрации:</span> 16 октября 2022</p>
+      <p><span class="field-name">Имена:</span> Максим Виноградов</p>
+      <p><span class="field-name">Фото:</span></p>
+      <img src="https://sun6-21.userapi.com/s/v1/ig2/fgULvnXu4hB1-_A0Sj8gqMmVdAHUvJUYzzm3IPJwlqtizOlaaAQ55ZVOD37AMbkBEPTWvwtgDJn-GKTOD5jtOmun.jpg?size=400x400&quality=95&crop=36,38,583,583&ava=1" alt="Фото Максима Виноградова" class="social-photo" />
+      <p><span class="field-name">Сообщества (созданные им):</span></p>
+      <ul>
+        <li><a href="https://m.vk.com/public218384505" target="_blank" rel="noopener noreferrer">https://m.vk.com/public218384505</a></li>
+        <li><a href="https://m.vk.com/club218286326" target="_blank" rel="noopener noreferrer">https://m.vk.com/club218286326</a></li>
+        <li><a href="https://m.vk.com/club218228041" target="_blank" rel="noopener noreferrer">https://m.vk.com/club218228041</a></li>
+      </ul>
+    </div>
+
+    <div class="relative-block">
+      <p><span class="field-name">2:</span> <a href="https://vk.com/id705378727" target="_blank" rel="noopener noreferrer">https://vk.com/id705378727</a></p>
+      <p><span class="field-name">Имена:</span> Энцо Гаттини, Ильяр Розаханов [2022-2023]</p>
+      <p><span class="field-name">Дата регистрации:</span> 15 февраля 2022</p>
+    </div>
+
+    <h3>Telegram:</h3>
+
+    <div class="relative-block">
+      <p><span class="field-name">Основной-аккаунт:</span></p>
+      <p><span class="field-name">ID:</span> 6371433870</p>
+      <p><span class="field-name">Дата регистрации:</span> ~14.07.2023</p>
+      <p><span class="field-name">IOS:</span> <a href="http://t.me/@id6371433870" target="_blank" rel="noopener noreferrer">http://t.me/@id6371433870</a></p>
+      <p><span class="field-name">Android:</span> Открыть</p>
+      <p><span class="field-name">Теги (Формат: тег - дата поставления, время):</span></p>
+      <ul>
+        <li>@powersavingmodee - 02.03.2025, 23:35</li>
+        <li>@glajrlp - 25.12.2024 01:58</li>
+        <li>@ggggggggg_ggggggggggg - 28.12.2024, 03:56</li>
+        <li>@klass1zzz - 04.11.2024, 14:23</li>
+        <li>@mmmmirma - 22.09.2024, 10:11</li>
+        <li>@meetthegrahams - 17.09.2024, 06:40</li>
+        <li>@eee_salvia_divinorum - 09.09.2024, 01:53</li>
+        <li>@mirmaas17 - 03.09.2024, 22:13</li>
+        <li>@ggg_gg_g_ggg_gg_g_ggg_gg_g - 20.08.2024, 13:30</li>
+        <li>@overcast_1777 - 14.08.2024, 08:41</li>
+        <li>@ndjdmdksksks - 06.08.2024, 09:33</li>
+        <li>@ggggbetttt - 01.08.2024, 00:45</li>
+        <li>@mirma1707 - 10.04.2024, 00:06</li>
+        <li>@Mirmao - 10.09.2023, 07:57</li>
+      </ul>
+    </div>
+
+    <div class="relative-block">
+      <p><span class="field-name">Бывшая либо нынешняя девушка:</span> <a href="https://t.me/asyq_ka" target="_blank" rel="noopener noreferrer">https://t.me/asyq_ka</a> (Я кстати мамочку её на хуе вертел пиздофеев) 08.03.2025 в 12:15 отправлял ей подарок на сумму ⭐️15</p>
+    </div>
+
+    <div class="back-button" id="backBtn-socseti">← Назад</div>
+  </div>
+
+  <div class="details" id="details-fotomaterial">
+    <h2>Фото-Материал</h2>
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="https://t.me/Hachemirma" target="_blank" rel="noopener noreferrer" class="photo-channel-button">Перейти в канал</a>
+    </div>
+    <div class="back-button" id="backBtn-fotomaterial">← Назад</div>
+  </div>
+
+<script>
+  const btnLichnye = document.getElementById('btn-lichnye');
+  const btnRodstvenniki = document.getElementById('btn-rodstvenniki');
+  const btnSocseti = document.getElementById('btn-socseti');
+  const btnFotomaterial = document.getElementById('btn-fotomaterial');
+  const menu = document.getElementById('menu');
+  const detailsLichnye = document.getElementById('details-lichnye');
+  const detailsRodstvenniki = document.getElementById('details-rodstvenniki');
+  const detailsSocseti = document.getElementById('details-socseti');
+  const detailsFotomaterial = document.getElementById('details-fotomaterial');
+  const backBtnLichnye = document.getElementById('backBtn-lichnye');
+  const backBtnRodstvenniki = document.getElementById('backBtn-rodstvenniki');
+  const backBtnSocseti = document.getElementById('backBtn-socseti');
+  const backBtnFotomaterial = document.getElementById('backBtn-fotomaterial');
+
+  btnLichnye.addEventListener('click', () => {
+    menu.style.display = 'none';
+    detailsLichnye.style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+
+  backBtnLichnye.addEventListener('click', () => {
+    detailsLichnye.style.display = 'none';
+    menu.style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+
+  btnRodstvenniki.addEventListener('click', () => {
+    menu.style.display = 'none';
+    detailsRodstvenniki.style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+
+  backBtnRodstvenniki.addEventListener('click', () => {
+    detailsRodstvenniki.style.display = 'none';
+    menu.style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+
+  btnSocseti.addEventListener('click', () => {
+    menu.style.display = 'none';
+    detailsSocseti.style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+
+  backBtnSocseti.addEventListener('click', () => {
+    detailsSocseti.style.display = 'none';
+    menu.style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+
+  btnFotomaterial.addEventListener('click', () => {
+    menu.style.display = 'none';
+    detailsFotomaterial.style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+
+  backBtnFotomaterial.addEventListener('click', () => {
+    detailsFotomaterial.style.display = 'none';
+    menu.style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+</script>
+
+</body>
+</html>
